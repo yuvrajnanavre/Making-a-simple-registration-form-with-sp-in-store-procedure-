@@ -1,0 +1,34 @@
+CREATE TABLE register(  
+    id int IDENTITY primary key,  
+    FirstName varchar(50), 
+	Lastname varchar(50),
+	Email varchar(50),
+	Phone bigint,  
+	DOB date,
+    Username varchar(50),  
+    Password varchar(50),
+	RePassword varchar(50)
+	)
+
+Alter table register add email varchar(50); 
+Alter table register rename column Name to Fname; 
+
+select * from register;
+
+drop procedure sp_insertintoregister;
+create procedure sp_insertintoregister
+@FirstName varchar(50),  
+@Lastname varchar(50),
+@Email varchar(50),
+@Phone bigint,
+@DOB date,
+@Username varchar(50),  
+@Password varchar(50),
+@RePassword varchar(50)
+as 
+begin
+insert into register(Firstname,Lastname, Email, Phone, DOB, username, password, RePassword) values (@FirstName,@Lastname,@Email,@Phone, @DOB, @Username,@Password,@RePassword)
+end
+
+exec sp_insertintoregister;
+select * from register;
